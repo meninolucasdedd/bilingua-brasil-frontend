@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import logoImg from "../../assets/logo.svg";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import "./style.css";
 
 import api from "../../services/api";
@@ -18,14 +17,6 @@ export default function Registro() {
   const [site, setSite] = useState("");
 
   const history = useHistory();
-
-  async function handleSuccess() {
-    toast.success("Conta criada com sucesso");
-  }
-
-  async function handleError() {
-    toast.error("Erro ao cadastrar");
-  }
 
   async function handleRegistro(event) {
     event.preventDefault();
@@ -42,10 +33,8 @@ export default function Registro() {
       const response = await api.post("instituicoes", data);
       alert(`Seu dado de acesso é: ${response.data.id}`);
       history.push("/");
-      return <ToastContainer />;
     } catch (err) {
-      // alert("Não funcionou, verifique novamente");
-      return <ToastContainer />;
+      alert("Não funcionou, verifique novamente");
     }
   }
 
@@ -116,7 +105,7 @@ export default function Registro() {
             onChange={(e) => setSite(e.target.value)}
           />
 
-          <button className="button" type="submit" onClick={handleSuccess}>
+          <button className="button" type="submit">
             Realizar Solicitação
           </button>
         </form>
